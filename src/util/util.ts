@@ -1,3 +1,5 @@
+import Iuser from '../domain/user/types/UserTypes';
+
 class util {
   static numberValidator(dados: number) {
     if (!isNaN(dados)) {
@@ -7,18 +9,22 @@ class util {
     }
   }
 
-  static fieldValidator(dados: object) {
-    const dataValues: any[] = Object.values(dados);
+  static fieldValidator(dados: Iuser) {
+    const dataValues: Iuser[] = Object.values(dados);
     const dataParameters: string[] = Object.keys(dados);
     let i = 0;
 
     while (i < dataValues.length) {
-      if (dataValues[i] == '') {
-        throw new Error(`O campo ${dataParameters[i]} está vazio`);
+      if (!dataValues[i]) {
+        if (
+          dataParameters[i] !== 'whatsapp' &&
+          dataParameters[i] !== 'email_sms'
+        ) {
+          throw new Error(`Campo ${dataParameters[i]} está vazio`);
+        }
       }
       i++;
     }
-
     return true;
   }
 
@@ -44,7 +50,7 @@ class util {
 
   static cellphoneSize(dados: string) {
     if (dados.length >= 11 && dados.length <= 13) {
-      return true
+      return true;
     } else {
       throw new Error('Numero de telefone Invlido');
     }

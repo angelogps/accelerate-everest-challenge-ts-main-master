@@ -17,9 +17,9 @@ class UserController {
   }
 
   static list(req: Request, res: Response) {
-      let createList = UserList.CreateList(Mock);
-      console.log(createList);
-      res.json(createList);
+    let createList = UserList.CreateList(Mock);
+    console.log(createList);
+    res.json(createList);
   }
 }
 

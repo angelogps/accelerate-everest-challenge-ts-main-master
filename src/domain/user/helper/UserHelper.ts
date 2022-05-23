@@ -1,3 +1,5 @@
+import Iuser from '../types/UserTypes';
+
 class UserHelper {
   static emailValidator(email: String, email_confirmation: String) {
     if (email === email_confirmation) {
@@ -7,8 +9,8 @@ class UserHelper {
     }
   }
 
-  static emailCheck(dados: string, Mock: object[]) {
-    const emailMock: any[] = Object.values(Mock);
+  static emailCheck(dados: string, Mock: Iuser[]) {
+    const emailMock: Iuser[] = Object.values(Mock);
     const lista = emailMock.map((item) => item.email);
 
     lista.forEach((lista) => {
@@ -18,11 +20,11 @@ class UserHelper {
         throw new Error('Email ja existe');
       }
     });
-    return true
+    return true;
   }
 
-  static list(mock: object[]) {
-    const mocks: any[] = Object.values(mock);
+  static list(mock: Iuser[]) {
+    const mocks: Iuser[] = Object.values(mock);
     const listaEmail = mocks.map((item) => item.email);
     const listaName = mocks.map((item) => item.full_name);
     let listArray: Object[] = [];
