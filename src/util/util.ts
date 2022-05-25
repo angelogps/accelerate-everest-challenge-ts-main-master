@@ -59,21 +59,13 @@ class util {
   static cpfCheck(dados: string) {
     let cpfClean: String = dados.replace(/\.|-/g, '');
 
-    if (
-      !cpfClean ||
-      cpfClean.length != 11 ||
-      cpfClean == '00000000000' ||
-      cpfClean == '11111111111' ||
-      cpfClean == '22222222222' ||
-      cpfClean == '33333333333' ||
-      cpfClean == '44444444444' ||
-      cpfClean == '55555555555' ||
-      cpfClean == '66666666666' ||
-      cpfClean == '77777777777' ||
-      cpfClean == '88888888888' ||
-      cpfClean == '99999999999'
-    ) {
-      throw new Error('Cpf Invalido');
+    let test = cpfClean[0];
+    for(let i=1; i<cpfClean.length;i++){
+      if(cpfClean[i]!= test){
+        break;
+      }else if(i===cpfClean.length-1){
+        throw new Error('Cpf invalido');
+      }
     }
 
     let cpfArray = Array.from(cpfClean, Number);
